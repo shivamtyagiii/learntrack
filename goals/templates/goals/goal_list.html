@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnTrack | My Goals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f4f7fb;
+            color: #243047;
+        }
+
+        h1 {
+            color: #2457c5;
+        }
+
+        .goal {
+            background: white;
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #00000010;
+        }
+
+        .status {
+            color: #16803c;
+            font-weight: bold;
+        }
+
+        .pending {
+            color: #b7791f;
+        }
+    </style>
+</head>
+<body>
+    <h1>LearnTrack 🎯</h1>
+    <p>Track your learning journey, one goal at a time.</p>
+
+    <h2>My Learning Goals</h2>
+
+    {% for goal in goals %}
+        <div class="goal">
+            <h3>{{ goal.title }}</h3>
+
+            <p>{{ goal.description|default:"No description added." }}</p>
+
+            {% if goal.completed %}
+                <p class="status">Completed ✓</p>
+            {% else %}
+                <p class="pending">In progress</p>
+            {% endif %}
+
+            <small>Created: {{ goal.created_at|date:"d M Y, h:i A" }}</small>
+        </div>
+    {% empty %}
+        <p>No goals yet. Your learning journey starts here!</p>
+    {% endfor %}
+</body>
+</html>
